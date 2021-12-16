@@ -7,14 +7,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.animesearcher.R
 import com.example.animesearcher.databinding.ShortLikedAnimeLayoutBinding
 import com.example.animesearcher.data.models.db.LikedAnime
+import com.example.animesearcher.data.models.dtos.ShortAnimeModel
 
-class LikedAnimeRecyclerAdapter(private val animals: ArrayList<LikedAnime>) :
+class LikedAnimeRecyclerAdapter(private val animals: List<ShortAnimeModel>) :
     RecyclerView.Adapter<LikedAnimeRecyclerAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val binding = ShortLikedAnimeLayoutBinding.bind(itemView);
-        fun bind(anima: LikedAnime) {
-            binding.animeTitle.text = anima.animeTitle;
+        fun bind(anima: ShortAnimeModel) {
+            binding.animeTitle.text = anima.attributes.titles.English;
         }
     }
 

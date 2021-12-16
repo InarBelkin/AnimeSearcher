@@ -3,6 +3,7 @@ package com.example.animesearcher.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
@@ -34,6 +35,7 @@ class AnimeListRecyclerAdapter(
             imageView.setOnClickListener {
                 goToAnimeCall.invoke(anima.id);
             }
+          itemView.context
             binding.checkLike.setOnCheckedChangeListener { p0, b ->
                 if (b) {
                     itemView.findViewTreeLifecycleOwner()?.lifecycleScope?.launch {
@@ -45,6 +47,7 @@ class AnimeListRecyclerAdapter(
                 }
 
             }
+
 
         }
 

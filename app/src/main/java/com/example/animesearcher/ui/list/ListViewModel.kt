@@ -2,6 +2,8 @@ package com.example.animesearcher.ui.list
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.animesearcher.data.database.DbRepos
+import com.example.animesearcher.data.database.LikedAnimeDao
 import com.example.animesearcher.data.models.dtos.ShortAnimeModel
 import com.example.animesearcher.data.net.ISearchRepository
 
@@ -10,19 +12,22 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class ListViewModel @Inject constructor(private val Search: ISearchRepository) : ViewModel() {
+class ListViewModel @Inject constructor(
+    private val Search: ISearchRepository,
+    val Db: DbRepos
+) : ViewModel() {
     private val animalsLiveData = MutableLiveData(ArrayList<ShortAnimeModel>());
 
-    public val animals
+    val animals
         get() = animalsLiveData;
 
-    public fun updateAnime() {
+    fun updateAnime() {
         Search.getAllAnime {
             animalsLiveData.value = it;
         }
     }
 
-    public fun searchAnime(searchString: String) {
+    fun searchAnime(searchString: String) {
         Search.getAnimeByName(searchString) {
             animalsLiveData.value = it;
         }

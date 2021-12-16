@@ -6,11 +6,12 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.animesearcher.data.models.db.LikedAnime
+import kotlinx.coroutines.Deferred
 
 @Dao
 interface LikedAnimeDao {
     @Query("SELECT * FROM likedanime")
-    fun getAll(): LiveData<List<LikedAnime>>
+     suspend fun getAll(): List<LikedAnime>
 
     @Query("SELECT * FROM likedanime WHERE uid IN (:animeIds)")
     fun loadAllByIds(animeIds: IntArray): List<LikedAnime>

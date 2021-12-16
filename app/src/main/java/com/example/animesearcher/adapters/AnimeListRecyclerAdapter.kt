@@ -1,25 +1,18 @@
 package com.example.animesearcher.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
-import android.widget.TextView
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.animesearcher.R
 import com.example.animesearcher.databinding.ShortAnimeLayoutBinding
-import com.example.animesearcher.models.db.LikedAnime
-import com.example.animesearcher.models.dtos.ShortAnimeModel
+import com.example.animesearcher.data.models.db.LikedAnime
+import com.example.animesearcher.data.models.dtos.ShortAnimeModel
 import com.example.animesearcher.other.AnimeSearcherApp
-import com.google.android.material.checkbox.MaterialCheckBox
 import com.squareup.picasso.Picasso
-import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.functions.Action
 import kotlinx.coroutines.launch
-import java.util.*
 import kotlin.collections.ArrayList
 
 class AnimeListRecyclerAdapter(

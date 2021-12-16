@@ -7,7 +7,7 @@
 
         <variable
             name="anime"
-            type="com.example.animesearcher.models.dtos.ShortAnimeModel" />
+            type="com.example.animesearcher.data.models.dtos.ShortAnimeModel" />
 
     </data>
 

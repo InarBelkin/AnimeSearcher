@@ -1,10 +1,8 @@
-package com.example.animesearcher.connection
+package com.example.animesearcher.data.net.connection
 
-import com.example.animesearcher.models.dtos.AnimeListDto
+import com.example.animesearcher.data.models.dtos.AnimeListDto
 import retrofit2.Call
-import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface AnimeApi {

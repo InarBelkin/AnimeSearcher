@@ -4,7 +4,7 @@ import android.app.Application
 
 
 import androidx.room.Room
-import com.example.animesearcher.database.AppDatabase
+import com.example.animesearcher.data.database.AppDatabase
 import dagger.hilt.android.HiltAndroidApp
 
 

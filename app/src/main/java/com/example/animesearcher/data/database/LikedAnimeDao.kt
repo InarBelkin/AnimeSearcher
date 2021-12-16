@@ -1,11 +1,11 @@
-package com.example.animesearcher.database
+package com.example.animesearcher.data.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.animesearcher.models.db.LikedAnime
+import com.example.animesearcher.data.models.db.LikedAnime
 
 @Dao
 interface LikedAnimeDao {

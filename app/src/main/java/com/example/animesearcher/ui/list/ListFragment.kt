@@ -14,12 +14,6 @@ import com.example.animesearcher.R
 import com.example.animesearcher.adapters.AnimeListRecyclerAdapter
 import com.example.animesearcher.databinding.ListFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
-import androidx.activity.viewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import com.example.animesearcher.models.db.LikedAnime
-import com.example.animesearcher.other.AnimeSearcherApp
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ListFragment : Fragment() {

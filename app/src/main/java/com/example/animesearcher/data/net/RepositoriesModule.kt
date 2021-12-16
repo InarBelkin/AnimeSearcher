@@ -1,13 +1,9 @@
-package com.example.animesearcher.repository
+package com.example.animesearcher.data.net
 
-import com.example.animesearcher.other.AnimeSearcherApp
-import com.example.animesearcher.ui.list.ListViewModel
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
-import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(ViewModelComponent::class)

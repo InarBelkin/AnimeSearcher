@@ -8,10 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
-import com.example.animesearcher.R
-import com.example.animesearcher.databinding.ListFragmentBinding
 import com.example.animesearcher.databinding.SingleAnimeFragmentBinding
-import com.example.animesearcher.models.dtos.ShortAnimeModel
+import com.example.animesearcher.data.models.dtos.ShortAnimeModel
 import com.example.animesearcher.ui.list.ListViewModel
 import com.squareup.picasso.Picasso
 

@@ -3,11 +3,10 @@ package com.example.animesearcher.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.animesearcher.R
 import com.example.animesearcher.databinding.ShortLikedAnimeLayoutBinding
-import com.example.animesearcher.models.db.LikedAnime
+import com.example.animesearcher.data.models.db.LikedAnime
 
 class LikedAnimeRecyclerAdapter(private val animals: ArrayList<LikedAnime>) :
     RecyclerView.Adapter<LikedAnimeRecyclerAdapter.MyViewHolder>() {

@@ -1,9 +1,9 @@
-package com.example.animesearcher.repository
+package com.example.animesearcher.data.net
 
 import android.util.Log
-import com.example.animesearcher.connection.NetworkService
-import com.example.animesearcher.models.dtos.AnimeListDto
-import com.example.animesearcher.models.dtos.ShortAnimeModel
+import com.example.animesearcher.data.net.connection.NetworkService
+import com.example.animesearcher.data.models.dtos.AnimeListDto
+import com.example.animesearcher.data.models.dtos.ShortAnimeModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

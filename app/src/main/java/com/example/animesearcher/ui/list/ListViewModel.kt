@@ -2,10 +2,9 @@ package com.example.animesearcher.ui.list
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.animesearcher.models.dtos.ShortAnimeModel
-import com.example.animesearcher.repository.ISearchRepository
+import com.example.animesearcher.data.models.dtos.ShortAnimeModel
+import com.example.animesearcher.data.net.ISearchRepository
 
-import com.example.animesearcher.repository.SearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

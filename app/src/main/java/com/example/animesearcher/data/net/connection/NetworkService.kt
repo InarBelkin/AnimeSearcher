@@ -1,4 +1,4 @@
-package com.example.animesearcher.connection
+package com.example.animesearcher.data.net.connection
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

@@ -1,6 +1,6 @@
-package com.example.animesearcher.repository
+package com.example.animesearcher.data.net
 
-import com.example.animesearcher.models.dtos.ShortAnimeModel
+import com.example.animesearcher.data.models.dtos.ShortAnimeModel
 
 interface ISearchRepository {
     fun getAllAnime(myCall: (ArrayList<ShortAnimeModel>) -> Unit)

@@ -1,4 +1,4 @@
-package com.example.animesearcher.models.db
+package com.example.animesearcher.data.models.db
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

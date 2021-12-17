@@ -43,12 +43,6 @@ class LikedAnimeFragment : Fragment() {
 
         binding.likedAnimeRecycler.layoutManager = LinearLayoutManager(requireContext());
 
-        val dao = AnimeSearcherApp.instance.database.likedAnimeDao()
-//        val allAnime = dao.getAll();
-//        allAnime.observe(viewLifecycleOwner) {
-//            val t = ArrayList(it);
-//            binding.likedAnimeRecycler.adapter = LikedAnimeRecyclerAdapter(t);
-//        }//TODO:Get List liked Animals
         listViewModel.Db.likedAnimals.observe(viewLifecycleOwner) {
             binding.likedAnimeRecycler.adapter = LikedAnimeRecyclerAdapter(it);
         }

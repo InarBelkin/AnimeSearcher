@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +15,7 @@ import com.example.animesearcher.R
 import com.example.animesearcher.adapters.AnimeListRecyclerAdapter
 import com.example.animesearcher.databinding.ListFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ListFragment : Fragment() {
@@ -33,10 +35,12 @@ class ListFragment : Fragment() {
         binding = ListFragmentBinding.inflate(inflater, container, false);
         viewModel.updateAnime();
         binding.animeRecycler.layoutManager = LinearLayoutManager(requireContext());
-
+        lifecycleScope.launch {
+            viewModel.Db.getAll();
+        }
         viewModel.animals.observe(viewLifecycleOwner) {
 
-            binding.animeRecycler.adapter = AnimeListRecyclerAdapter(viewModel.animals.value!!) {animeId->GoToAnime(animeId)};
+            binding.animeRecycler.adapter = AnimeListRecyclerAdapter(viewModel.animals.value!!,viewModel.Db) {animeId->GoToAnime(animeId)};
         }
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

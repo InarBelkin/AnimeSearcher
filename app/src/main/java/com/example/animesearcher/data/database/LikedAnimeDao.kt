@@ -20,5 +20,5 @@ interface LikedAnimeDao {
     suspend fun insertAll(vararg animes: LikedAnime)
 
     @Delete
-    fun delete(user: LikedAnime)
+    suspend fun delete(user: LikedAnime)
 }

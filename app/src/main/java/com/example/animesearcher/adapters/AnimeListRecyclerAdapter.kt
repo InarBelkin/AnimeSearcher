@@ -8,6 +8,7 @@ import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.animesearcher.R
+import com.example.animesearcher.data.database.IDbRepos
 import com.example.animesearcher.databinding.ShortAnimeLayoutBinding
 import com.example.animesearcher.data.models.db.LikedAnime
 import com.example.animesearcher.data.models.dtos.ShortAnimeModel
@@ -18,6 +19,7 @@ import kotlin.collections.ArrayList
 
 class AnimeListRecyclerAdapter(
     private val shortAnime: ArrayList<ShortAnimeModel>,
+    private val db: IDbRepos,
     private val goToAnimeCall: (Int) -> Unit
 ) :
     RecyclerView.Adapter<AnimeListRecyclerAdapter.MyViewHolder>() {
@@ -25,7 +27,7 @@ class AnimeListRecyclerAdapter(
     class MyViewHolder(itemview: View) : RecyclerView.ViewHolder(itemview) {
 
         val binding = ShortAnimeLayoutBinding.bind(itemView);
-        fun bind(anima: ShortAnimeModel, goToAnimeCall: (Int) -> Unit) {
+        fun bind(anima: ShortAnimeModel, goToAnimeCall: (Int) -> Unit, db: IDbRepos) {
             binding.title.text = anima.attributes.titles.English;
             binding.dates.text = anima.attributes.startDate + " - " + anima.attributes.endDate;
             binding.rating.text = "Rating: " + anima.attributes.averageRating ?: "No data";
@@ -35,14 +37,17 @@ class AnimeListRecyclerAdapter(
             imageView.setOnClickListener {
                 goToAnimeCall.invoke(anima.id);
             }
-          itemView.context
+            binding.checkLike.isChecked =
+                db.likedAnimals.value!!.filter { it.id == anima.id }.count() > 0;
+            itemView.context
             binding.checkLike.setOnCheckedChangeListener { p0, b ->
                 if (b) {
                     itemView.findViewTreeLifecycleOwner()?.lifecycleScope?.launch {
-                        val dao = AnimeSearcherApp.instance.database.likedAnimeDao();
-                        dao.insertAll(LikedAnime(0, anima.id, anima.attributes.titles.English));
+                        db.AddLike(anima);
+                        binding.checkLike.isActivated = true;
                     }
                 } else {
+
 
                 }
 
@@ -64,7 +69,7 @@ class AnimeListRecyclerAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         var anima = shortAnime[position];
-        holder.bind(anima, goToAnimeCall);
+        holder.bind(anima, goToAnimeCall, db);
     }
 
     override fun getItemCount(): Int {

@@ -12,12 +12,14 @@ import dagger.hilt.android.components.ViewModelComponent
 @InstallIn(ViewModelComponent::class)
 public class DbModule {
 
-        @Provides
-        fun getDao(app:Application): LikedAnimeDao{
-            return Room.databaseBuilder(app.applicationContext, AppDatabase::class.java, "database")
-                .fallbackToDestructiveMigration()
-                .build().likedAnimeDao();
-        }
+    @Provides
+    fun getDao(app: Application): LikedAnimeDao {
+        return Room.databaseBuilder(app.applicationContext, AppDatabase::class.java, "database")
+            .fallbackToDestructiveMigration()
+            .build().likedAnimeDao();
+    }
+    @Provides
+    fun getDb(dao: LikedAnimeDao): IDbRepos = DbRepos(dao)
 }
 
 //@Module

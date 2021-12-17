@@ -65,7 +65,7 @@ class ListFragment : Fragment() {
         return binding.root;
     }
 
-    public fun GoToAnime(AnimeId: Int) {
+    private fun GoToAnime(AnimeId: Int) {
         val activity = requireActivity();
         val host =
             activity.supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment;

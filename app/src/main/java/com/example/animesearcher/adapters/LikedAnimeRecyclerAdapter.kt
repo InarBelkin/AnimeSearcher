@@ -9,13 +9,19 @@ import com.example.animesearcher.databinding.ShortLikedAnimeLayoutBinding
 import com.example.animesearcher.data.models.db.LikedAnime
 import com.example.animesearcher.data.models.dtos.ShortAnimeModel
 
-class LikedAnimeRecyclerAdapter(private val animals: List<ShortAnimeModel>) :
+class LikedAnimeRecyclerAdapter(
+    private val animals: List<ShortAnimeModel>,
+    private val goToAnimeCall: (Int) -> Unit
+) :
     RecyclerView.Adapter<LikedAnimeRecyclerAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val binding = ShortLikedAnimeLayoutBinding.bind(itemView);
-        fun bind(anima: ShortAnimeModel) {
+        fun bind(anima: ShortAnimeModel, goToAnimeCall: (Int) -> Unit) {
             binding.animeTitle.text = anima.attributes.titles.English;
+            binding.card.setOnClickListener {
+                goToAnimeCall.invoke(anima.id);
+            }
         }
     }
 
@@ -27,8 +33,8 @@ class LikedAnimeRecyclerAdapter(private val animals: List<ShortAnimeModel>) :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        var anima = animals[position];
-        holder.bind(anima);
+        val anima = animals[position];
+        holder.bind(anima, goToAnimeCall);
     }
 
     override fun getItemCount(): Int {

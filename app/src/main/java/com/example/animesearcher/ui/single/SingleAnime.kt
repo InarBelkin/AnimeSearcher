@@ -32,23 +32,31 @@ class SingleAnime : Fragment() {
         binding = SingleAnimeFragmentBinding.inflate(inflater, container, false);
 
         val args: SingleAnimeArgs by navArgs();
-        var anime: ShortAnimeModel? = null;
-        viewModelList.animals.value!!.forEach {
-            if (it.id == args.animeId)
-                anime = it;
+
+        val foundedAnime = viewModelList.animals.value!!.filter { it.id == args.animeId };
+        if (foundedAnime.isEmpty())
+            viewModelList.Search.getAnimeById(args.animeId) {
+            bindAnime(it);
         }
-        binding.anime = anime;
-        binding.rating.text = "Rating:" + (anime?.attributes?.averageRating ?: "no data");
-        val imgUrl = anime!!.attributes.posterImage.medium;
-        val imageView = binding.titleImage;
-        Picasso.get().load(imgUrl).into(imageView);
+        else bindAnime(foundedAnime.first());
 
         return binding.root;
     }
 
+    private fun bindAnime(anime: ShortAnimeModel) {
+        binding.anime = anime;
+        binding.rating.text = "Rating:" + (anime.attributes.averageRating ?: "no data");
+
+        val imgUrl = anime.attributes.posterImage.medium;
+        val imageView = binding.titleImage;
+        Picasso.get().load(imgUrl).into(imageView);
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move);
+        sharedElementEnterTransition =
+            TransitionInflater.from(context).inflateTransition(android.R.transition.move);
     }
 
 

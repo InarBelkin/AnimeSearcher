@@ -28,5 +28,9 @@
         android:id="@+id/likedAnimeFragment"
         android:name="com.example.animesearcher.ui.liked.LikedAnimeFragment"
         android:label="liked_anime_fragment"
-        tools:layout="@layout/liked_anime_fragment" />
+        tools:layout="@layout/liked_anime_fragment" >
+        <action
+            android:id="@+id/action_likedAnimeFragment_to_singleAnime"
+            app:destination="@id/singleAnime" />
+    </fragment>
 </navigation>

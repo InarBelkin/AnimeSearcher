@@ -1,6 +1,7 @@
 package com.example.animesearcher.data.net
 
 import android.util.Log
+import com.example.animesearcher.data.models.dtos.AnimeByIdWrapper
 import com.example.animesearcher.data.net.connection.NetworkService
 import com.example.animesearcher.data.models.dtos.AnimeListDto
 import com.example.animesearcher.data.models.dtos.ShortAnimeModel
@@ -26,6 +27,7 @@ class SearchRepository @Inject constructor() : ISearchRepository {
                         Log.e(TAG, response.message());
                     }
                 }
+
                 override fun onFailure(call: Call<AnimeListDto>, t: Throwable) {
                     Log.e(TAG, t.localizedMessage!!);
                 }
@@ -35,9 +37,12 @@ class SearchRepository @Inject constructor() : ISearchRepository {
 
     }
 
-    override fun getAnimeByName(searchString:String, myCall: (ArrayList<ShortAnimeModel>) -> Unit){
+    override fun getAnimeByName(
+        searchString: String,
+        myCall: (ArrayList<ShortAnimeModel>) -> Unit
+    ) {
         NetworkService.Instance.anime.getAnimeByName(searchString)
-            .enqueue(object : Callback<AnimeListDto>{
+            .enqueue(object : Callback<AnimeListDto> {
                 override fun onResponse(
                     call: Call<AnimeListDto>,
                     response: Response<AnimeListDto>
@@ -55,6 +60,27 @@ class SearchRepository @Inject constructor() : ISearchRepository {
 
             })
 
+    }
+
+    override fun getAnimeById(animeId: Int, myCall: (ShortAnimeModel) -> Unit) {
+        NetworkService.Instance.anime.getAnimeById(animeId)
+            .enqueue(object : Callback<AnimeByIdWrapper> {
+                override fun onResponse(
+                    call: Call<AnimeByIdWrapper>,
+                    response: Response<AnimeByIdWrapper>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        myCall.invoke(response.body()!!.data)
+                    } else {
+                        Log.e(TAG, response.message());
+                    }
+                }
+
+                override fun onFailure(call: Call<AnimeByIdWrapper>, t: Throwable) {
+                    Log.e(TAG, t.localizedMessage!!);
+                }
+
+            })
     }
 
 

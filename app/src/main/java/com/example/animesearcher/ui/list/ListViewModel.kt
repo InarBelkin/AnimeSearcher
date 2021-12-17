@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ListViewModel @Inject constructor(
-    private val Search: ISearchRepository,
+    val Search: ISearchRepository,
     val Db: IDbRepos
 ) : ViewModel() {
     private val animalsLiveData = MutableLiveData(ArrayList<ShortAnimeModel>());
@@ -44,6 +44,7 @@ class ListViewModel @Inject constructor(
             animalsLiveData.value = animals;
         }
     }
+
 
 //    @Inject
 //    protected lateinit var testRepos: ITestRepos;

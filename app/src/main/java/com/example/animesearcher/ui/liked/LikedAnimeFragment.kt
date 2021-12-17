@@ -10,12 +10,15 @@ import android.view.ViewGroup
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.animesearcher.R
 import com.example.animesearcher.adapters.LikedAnimeRecyclerAdapter
 import com.example.animesearcher.data.database.DbRepos
 import com.example.animesearcher.databinding.LikedAnimeFragmentBinding
 import com.example.animesearcher.other.AnimeSearcherApp
+import com.example.animesearcher.ui.list.ListFragmentDirections
 import com.example.animesearcher.ui.list.ListViewModel
 import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,13 +47,23 @@ class LikedAnimeFragment : Fragment() {
         binding.likedAnimeRecycler.layoutManager = LinearLayoutManager(requireContext());
 
         listViewModel.Db.likedAnimals.observe(viewLifecycleOwner) {
-            binding.likedAnimeRecycler.adapter = LikedAnimeRecyclerAdapter(it);
+            binding.likedAnimeRecycler.adapter =
+                LikedAnimeRecyclerAdapter(it, this@LikedAnimeFragment::goToAnime);
         }
         lifecycleScope.launch {
             listViewModel.Db.getAll();
         }
 
         return binding.root;
+    }
+
+    private fun goToAnime(AnimeId: Int) {
+        val activity = requireActivity();
+        val host =
+            activity.supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment;
+        val action = LikedAnimeFragmentDirections.actionLikedAnimeFragmentToSingleAnime();
+        action.animeId = AnimeId;
+        host.findNavController().navigate(action);
     }
 
 }

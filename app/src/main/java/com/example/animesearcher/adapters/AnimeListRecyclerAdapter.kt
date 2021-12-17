@@ -37,25 +37,15 @@ class AnimeListRecyclerAdapter(
             imageView.setOnClickListener {
                 goToAnimeCall.invoke(anima.id);
             }
-            binding.checkLike.isChecked =
-                db.likedAnimals.value!!.filter { it.id == anima.id }.count() > 0;
+            binding.checkLike.isChecked = anima.isLiked;
             itemView.context
             binding.checkLike.setOnCheckedChangeListener { p0, b ->
-                if (b) {
-                    itemView.findViewTreeLifecycleOwner()?.lifecycleScope?.launch {
-                        db.AddLike(anima);
-                        binding.checkLike.isActivated = true;
-                    }
-                } else {
-
-
+                itemView.findViewTreeLifecycleOwner()?.lifecycleScope?.launch {
+                    if (b) db.AddLike(anima) else db.deleteByAnimeId(anima.id);
+                    anima.isLiked = b;
                 }
-
             }
-
-
         }
-
     }
 
     override fun onCreateViewHolder(

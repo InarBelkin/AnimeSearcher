@@ -11,7 +11,10 @@ import kotlinx.coroutines.Deferred
 @Dao
 interface LikedAnimeDao {
     @Query("SELECT * FROM likedanime")
-     suspend fun getAll(): List<LikedAnime>
+    suspend fun getAll(): List<LikedAnime>
+
+    @Query("SELECT * FROM LikedAnime WHERE animeId = :animeId")
+    suspend fun getByAnimeId(animeId: Int): List<LikedAnime>;
 
     @Query("SELECT * FROM likedanime WHERE uid IN (:animeIds)")
     fun loadAllByIds(animeIds: IntArray): List<LikedAnime>
@@ -21,4 +24,7 @@ interface LikedAnimeDao {
 
     @Delete
     suspend fun delete(user: LikedAnime)
+
+    @Query("DELETE FROM LikedAnime WHERE animeId = :animeId")
+    suspend fun deleteByAnimeId(animeId: Int);
 }

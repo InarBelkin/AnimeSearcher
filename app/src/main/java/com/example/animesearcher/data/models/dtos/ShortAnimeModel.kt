@@ -11,6 +11,7 @@ class ShortAnimeModel {
     @SerializedName("id")
     var id:Int = 0;
 
+    var isLiked = false;
 
 
 }

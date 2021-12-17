@@ -33,19 +33,26 @@ class ListFragment : Fragment() {
     ): View? {
         viewModel = ViewModelProvider(requireActivity()).get(ListViewModel::class.java)
         binding = ListFragmentBinding.inflate(inflater, container, false);
-        viewModel.updateAnime();
         binding.animeRecycler.layoutManager = LinearLayoutManager(requireContext());
         lifecycleScope.launch {
             viewModel.Db.getAll();
         }
-        viewModel.animals.observe(viewLifecycleOwner) {
 
-            binding.animeRecycler.adapter = AnimeListRecyclerAdapter(viewModel.animals.value!!,viewModel.Db) {animeId->GoToAnime(animeId)};
+        viewModel.animals.observe(viewLifecycleOwner) {
+            binding.animeRecycler.adapter = AnimeListRecyclerAdapter(
+                viewModel.animals.value!!,
+                viewModel.Db
+            ) { animeId -> GoToAnime(animeId) };
         }
+
+        binding.searchView.setQuery(viewModel.searchString,true);
+
+        viewModel.searchAnime();
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
-                viewModel.searchAnime(p0 ?: "");
+                viewModel.searchString = p0 ?: "";
+                viewModel.searchAnime();
                 return false;
             }
 

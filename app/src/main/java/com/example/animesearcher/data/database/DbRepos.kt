@@ -29,8 +29,12 @@ class DbRepos @Inject constructor(private val dao: LikedAnimeDao) : IDbRepos {
         dao.insertAll(likedAnima);
     }
 
-    suspend fun DeleteLike(anime: ShortAnimeModel){
-        val likedAnima = LikedAnime(0, anime.id, anime.attributes.titles.English);
-        dao.delete(likedAnima);
+    override suspend fun deleteByAnimeId(animeId: Int) {
+        dao.deleteByAnimeId(animeId);
     }
+
+    override suspend fun getByAnimeId(animeId: Int): List<LikedAnime> {
+        return dao.getByAnimeId(animeId);
+    }
+
 }

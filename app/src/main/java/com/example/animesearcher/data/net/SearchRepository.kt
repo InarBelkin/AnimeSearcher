@@ -32,9 +32,7 @@ class SearchRepository @Inject constructor() : ISearchRepository {
                     Log.e(TAG, t.localizedMessage!!);
                 }
             }
-
             )
-
     }
 
     override fun getAnimeByName(

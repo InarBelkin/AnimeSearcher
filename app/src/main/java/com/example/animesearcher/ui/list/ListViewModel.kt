@@ -10,6 +10,7 @@ import com.example.animesearcher.data.models.dtos.ShortAnimeModel
 import com.example.animesearcher.data.net.ISearchRepository
 
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -36,13 +37,11 @@ class ListViewModel @Inject constructor(
         ) else updateAnime()
     }
 
-    fun searchCall(animals: ArrayList<ShortAnimeModel>) {
-        viewModelScope.launch {
-            animals.forEach { anime ->
-                anime.isLiked = Db.getByAnimeId(anime.id).isNotEmpty();
-            }
-            animalsLiveData.value = animals;
+    fun searchCall(animals: ArrayList<ShortAnimeModel>):Job = viewModelScope.launch {
+        animals.forEach { anime ->
+            anime.isLiked = Db.getByAnimeId(anime.id).isNotEmpty();
         }
+        animalsLiveData.value = animals;
     }
 
 
